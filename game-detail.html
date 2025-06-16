@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>遊戲購買詳細頁</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: url('pic/background-texture.png') repeat;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .game-detail {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .game-left {
+            flex: 1;
+            position: relative;
+        }
+
+        .main-wrapper {
+            max-width: 1000px;  /* ⭐⭐ 這樣不會撐滿頁面 */
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 100px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #87f8c9;
+            text-decoration: underline;
+        }
+
+        /* ⭐⭐ 調整 game-detail 行距，讓它更像你圖上的樣子 ⭐⭐ */
+        .game-detail {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .game-info li {
+            line-height: 1.8;
+        }
+
+        .main-image {
+            width: 480px;
+            height: 360px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .thumbnails {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .thumbnail-viewport {
+            overflow: hidden;
+            width: 400px; /* 120*3 + 10*2 gap */
+            display: flex;
+            /* 縮圖 viewport 固定寬度，裡面滑動 */
+        }
+
+        #thumbnail-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 10px;
+            /* 不要設定 width，讓內容自然寬 */
+        }
+
+        .thumbnail {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .thumbnail.active {
+            border-color: #87f8c9;
+        }
+
+        .arrow.disabled {
+            opacity: 0.3; /* 看起來是灰的 */
+            pointer-events: none; /* 禁用點擊 */
+        }
+
+        #prev-arrow,
+        #next-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 80px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #87f8c9;
+            user-select: none;
+        }
+
+        .arrow {
+            cursor: pointer;
+            font-size: 24px;
+            color: #87f8c9;
+            user-select: none;
+        }
+
+        .game-right {
+            flex: 1;
+        }
+
+        .game-intro {
+            border-top: 1px solid #fff;
+            padding-top: 20px;
+        }
+
+        .price-section {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .buy-btn {
+        background: linear-gradient(135deg, #f79d44, #f58220);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .disabled-btn {
+        background: #777;
+        color: #ddd;
+        cursor: default;
+        box-shadow: none;
+        pointer-events: none;
+        transform: none;
+        }
+
+        .buy-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(135deg, #42ba98, #00b61f);
+        }
+
+        .buy-btn.disabled-btn:hover {
+        /* 不要 hover 效果 */
+        transform: none;
+        box-shadow: none;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div> 
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header-placeholder").innerHTML = data;
+        });
+    });
+    </script>
+
+
+<script src="game.data.js"></script>
+
+
+
+
+    <div class="main-wrapper">
+
+        <!-- ⭐⭐ 加麵包屑 ⭐⭐ -->
+        <div class="breadcrumb">
+        <a href="index.html">首頁</a> &gt; <a href="index.html#download-section">遊戲下載</a>
+        </div>
+
+        <div class="game-detail">
+            <div class="game-left">
+                <img id="main-image" class="main-image" src="" alt="主圖">
+            <div class="thumbnails">
+                <span id="prev-arrow" class="arrow">&#10094;</span>
+                <div class="thumbnail-viewport">
+                    <div id="thumbnail-container"></div>
+                </div>
+                <span id="next-arrow" class="arrow">&#10095;</span>
+            </div>
+            </div> <!-- 正確：game-left 這邊就關掉 -->
+
+            <div class="game-right"> <!-- 這邊應該是和 game-left 同層 -->
+                <h2 id="game-title"></h2>
+                <ul id="game-info"></ul>
+                <div class="price-section" id="game-price"></div>
+                <div id="buy-button-container" class="button-group"></div>
+            </div>
+        </div>
+
+        <div class="game-intro">
+            <h3 id="intro-title"></h3>
+            <p id="intro-text"></p>
+        </div>
+
+<script>
+function getGameIdFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id") || "game001";
+}
+
+$(document).ready(function() {
+    const gameId = getGameIdFromURL();
+    const gameData = games[gameId];
+
+    // 設定主圖、標題、資訊、價格
+    $("#main-image").attr("src", gameData.mainImage);
+    $("#game-title").text(gameData.title);
+    $("#game-info").html(`
+        <li>預計發售日：${gameData.releaseDate}</li>
+        <li>平台：${gameData.platform}</li>
+        <li>語言：${gameData.language}</li>
+        <li>字幕：${gameData.subtitle}</li>
+        <li>作品分級：${gameData.rating}</li>
+    `);
+
+    let priceDisplay = gameData.isFree ? "免費下載" : `NT$${gameData.originalPrice}`;
+    $("#game-price").text(priceDisplay);
+
+    $("#intro-title").text(gameData.introTitle);
+    $("#intro-text").html(gameData.introText);
+    let buttonHTML = "";
+
+function isLoggedIn() {
+  return localStorage.getItem("loginUser") !== null;
+}
+
+if (gameData.isFree) {
+  // 免費下載不需登入
+  buttonHTML += `<a href="${gameData.buyLink}" class="buy-btn">免費下載</a>`;
+} else if (gameData.isAvailable && gameData.buyLink) {
+  if (isLoggedIn()) {
+    buttonHTML += `<a href="${gameData.buyLink}" class="buy-btn">立即購買</a>`;
+  } else {
+    buttonHTML += `<a href="doctype.html" class="buy-btn">立即購買</a>`;
+  }
+} else {
+  buttonHTML += `<button class="buy-btn disabled-btn" disabled>敬請期待</button>`;
+}
+
+if (gameData.demoLink) {
+    buttonHTML += `<a href="${gameData.demoLink}" class="buy-btn demo" target="_blank">試玩版下載</a>`;
+}
+
+if (gameData.steamLink) {
+    buttonHTML += `<a href="${gameData.steamLink}" class="buy-btn steam" target="_blank">STEAM 頁面</a>`;
+}
+
+$("#buy-button-container").html(buttonHTML);
+
+    // 縮圖輪播功能
+let currentStartIndex = 0;
+const thumbnailsPerPage = 3;
+const totalThumbnails = gameData.images.length;
+
+function renderThumbnails() {
+    const container = $("#thumbnail-container");
+    container.empty();
+
+    gameData.images.forEach((src, index) => {
+        const img = $(`<img src="${src}" class="thumbnail">`);
+        img.click(function() {
+            $(".thumbnail").removeClass("active");
+            img.addClass("active");
+            $("#main-image").attr("src", src);
+        });
+        container.append(img);
+    });
+
+    updateThumbnailPosition();
+}
+
+function updateThumbnailPosition() {
+    const thumbnailWidth = 120;
+    const gap = 10;
+    const offset = -(currentStartIndex * (thumbnailWidth + gap));
+    $("#thumbnail-container").css("transform", `translateX(${offset}px)`);
+
+    // 不隱藏箭頭 → 改成加上 disabled class
+    if (currentStartIndex > 0) {
+        $("#prev-arrow").removeClass("disabled");
+    } else {
+        $("#prev-arrow").addClass("disabled");
+    }
+
+    if (currentStartIndex + thumbnailsPerPage < totalThumbnails) {
+        $("#next-arrow").removeClass("disabled");
+    } else {
+        $("#next-arrow").addClass("disabled");
+    }
+}
+
+$("#prev-arrow").click(function() {
+    if (currentStartIndex > 0) {
+        currentStartIndex--;
+        updateThumbnailPosition();
+    }
+});
+
+$("#next-arrow").click(function() {
+    if (currentStartIndex + thumbnailsPerPage < totalThumbnails) {
+        currentStartIndex++;
+        updateThumbnailPosition();
+    }
+});
+
+renderThumbnails();
+});
+</script>
+
+
+</body>
+</html>

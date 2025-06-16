@@ -1,0 +1,125 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>最新消息 詳細內容</title>
+    <style>
+    body {
+    margin: 0;
+    font-family: sans-serif;
+    background: url('pic/background-texture.png') repeat;
+    color: #fff;
+    padding-top: 80px; 
+    }
+
+    .breadcrumb {
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 14px;
+    }
+
+    .breadcrumb a {
+    color: #ffffff;
+    
+    text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        color: #87f8c9;
+    text-decoration: underline;
+    }
+
+    .main-wrapper {
+    padding-top: 100px; 
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+
+    .news-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center; 
+    }
+
+    .news-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    }
+
+    .news-date {
+    text-align: right;
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 20px;
+    }
+
+    .news-image {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    }
+
+    .news-content {
+    font-size: 16px;
+    line-height: 1.8;
+    background-color: rgba(0,0,0,0.4);
+    padding: 16px 20px;
+    border-radius: 8px;
+    text-align: left; 
+    }
+    </style>
+
+    <script src="news-data.js"></script>
+    </head>
+    <body>
+    <div id="header-placeholder"></div> 
+
+        <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("header-placeholder").innerHTML = data;
+        });
+    });
+    </script>
+
+    <div class="main-wrapper"></div>
+    <div class="breadcrumb">
+    <a href="index.html">首頁</a> &gt; <a href="index.html#news-section">最新消息</a> &gt; 詳細內容
+    </div>
+    <div class="news-container">
+        <h1 id="news-title" class="news-title"></h1>
+        <div id="news-date" class="news-date"></div>
+        <img id="news-image" class="news-image" src="" alt="News Image" />
+        <div id="news-content" class="news-content"></div>
+    </div>
+    </div>
+
+    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const newsId = urlParams.get('id');
+
+    const newsItem = Details.find(item => item.id === newsId);
+
+    if (newsItem) {
+        document.getElementById('news-title').textContent = newsItem.title;
+        document.getElementById('news-date').textContent = newsItem.date;
+        document.getElementById('news-image').src = newsItem.image;
+        document.getElementById('news-content').innerHTML = newsItem.content.replace(/\n/g, "<br>");
+    } else {
+        document.getElementById('news-title').textContent = '找不到該消息';
+        document.getElementById('news-content').textContent = '您點擊的消息不存在，請返回上一頁。';
+    }
+    </script>
+
+    </body>
+    </html>

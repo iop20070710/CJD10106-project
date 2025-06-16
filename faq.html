@@ -1,0 +1,266 @@
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+    <head>
+      <meta charset="UTF-8">
+      <title>常見問題 FAQ｜金針咕</title>
+      <style>
+        body {
+          margin: 0;
+          font-family: sans-serif;
+          background: url('pic/background-texture.png') repeat;
+          color: #fff;
+          padding-top: 80px; /* ⭐ header fixed 高度預留 80px */
+        }
+
+        .container {
+          max-width: 1000px;
+          margin: 50px auto;
+          padding: 0;
+        }
+
+        .back-link {
+          color: #fff;
+          text-decoration: none;
+          margin-bottom: 10px; /* 改小一點，會比較緊湊 */
+          display: inline-block;
+          font-size: 0.9em;
+        }
+
+        .back-link:hover {
+          color: #87f8c9;
+
+        }
+
+        h1 {
+          text-align: center;
+          font-size: 32px;
+          color: #ffffff;
+          margin-top: 40px;  /* ⭐ header 下面再留一點空 */
+          margin-bottom: 10px;
+        }
+
+        h2 {
+          font-size: 2em;
+          text-align: center;
+          margin-bottom: 0.5em;
+        }
+
+        h3 {
+          font-size: 1.2em;
+          color: #f7f7f7;
+          text-align: center;
+          margin-top: 0;
+        }
+        .report-box {
+          background: #222;
+          border: 2px solid #fff;
+          padding: 1em;
+          margin: 2em auto;
+          max-width: 500px;
+          line-height: 1.6;
+          font-size: 0.95em;
+        }
+
+        .faq-item {
+          margin: 1.5em 0;
+          padding: 0.5em;
+          border-bottom: 1px solid #fff;
+        }
+
+        .faq-item strong {
+          display: block;
+          font-size: 1em;
+        }
+
+    .faq-item {
+      border-bottom: 1px solid #fff;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-toggle {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+      .faq-answer {
+    display: none;
+    padding: 16px 20px; 
+    color: #f0f0f0; 
+    margin-top: 8px;
+    background-color: rgba(0, 0, 0, 0.4); 
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+    font-size: 15px; 
+    transition: opacity 0.3s ease;
+    opacity: 2;
+      }
+
+    /* 展開時效果 */
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg); 
+    }
+
+  .faq-sub-item {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 3px solid #b4b4b4;
+    font-size: 14px;
+  }
+
+  .faq-sub-question {
+    display: flex;
+    color: #ff5a5a;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .faq-sub-toggle {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+  }
+
+.faq-sub-answer {
+  display: none;
+  padding: 16px 20px; 
+  color: #f0f0f0; 
+  margin-top: 8px;
+  background-color: rgba(0, 0, 0, 0.75); 
+  border-radius: 10px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  line-height: 1.6; 
+  font-size: 15px; 
+  transition: opacity 0.3s ease;
+  opacity: 2;
+}
+
+  /* 展開效果 */
+  .faq-sub-item.active .faq-sub-answer {
+    display: block;
+  }
+
+  .faq-sub-item.active .faq-sub-toggle {
+    transform: rotate(180deg);
+  }
+
+
+        @media (max-width: 600px) {
+          .container {
+            padding: 1em;
+          }
+
+          .report-box {
+            width: 100%;
+          }
+        }
+      </style>
+    </head>
+    <body>
+  <div id="header-placeholder"></div> 
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch("header.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+      });
+  });
+  </script>
+
+
+
+      <div class="container">
+        <a href="index.html" class="back-link">&lt; 返回首頁</a>
+        <h1>常見訊息</h1>
+        <h2>如何回報遊戲問題？</h2>
+        <h3>以下是幾種回報方式：</h3>
+
+        <div class="report-box">
+          1. 點選聯絡我們<br>
+          2. 最下方回填相關 > 問題回報<br>
+          3. 填寫回饋問卷<br><br>
+          使用 Google 聯絡信箱：<br>
+          <strong>asd20070710@gmail.com</strong>
+        </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <strong>《謳歌的聖女》能不能達成好結局並獲得神兵材料？</strong>
+      <span class="faq-toggle">&#9660;</span>
+    </div>
+    <div class="faq-answer">
+      當然可以！要在瓦修塔的劇情中細心一點！<br>接著展現你高超的戰鬥技巧，不要額外使用《世界樹的樹枝》！
+
+
+      <div class="faq-sub-item">
+        <div class="faq-sub-question">
+          <strong>此處是有關於更詳細攻略的部分，想依靠自己探索的玩家請勿點開。</strong>
+          <span class="faq-sub-toggle">&#9660;</span>
+        </div>
+        <div class="faq-sub-answer">
+          詳細攻略：<br>
+          1️⃣ 在第一次聽見夏拉諾蒂的傳喚時往右邊走，<br>會見到一塊顏色特別不一樣的樹皮。<br>
+          2️⃣ 調查它往上爬即可額外獲得一個《乾枯的樹枝》，<br>後續劇情會一同變成《世界樹的樹枝》<br>
+          3️⃣ 接著只要在後續戰鬥都不使用《世界樹的樹枝》，<br>即可在既能兌換神兵，也能進入好結局的情況下完成遊戲。<br>
+          ※ 延伸閱讀：除了這個方法以外，<br>在法蘭西斯法典國中探索時，來到右方區域一間房屋門前有寶箱的房子，<br>進入後也能夠從作者手中選擇獲得《世界樹的樹枝》<br>
+          ※ 延伸閱讀２：在最終迷宮11~15F之間中擊倒遊走的怪物，<br>也有極低的機率能獲得世界樹的樹枝（想要從這裡獲取的玩家請自行斟酌）<br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <strong>《月藍傳奇 Remake》為什麼死亡掉時會大量升等？</strong>
+      <span class="faq-toggle">&#9660;</span> 
+    </div>
+    <div class="faq-answer">
+      是清明節的特別活動，<br>在死亡時戰鬥勝利，獲得的經驗值會提升為４４倍。
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <strong>《月藍傳奇》有沒有機會出三，或是2remake？</strong>
+      <span class="faq-toggle">&#9660;</span> 
+    </div>
+    <div class="faq-answer">
+      機率非常渺茫，團隊的大家已經成為了社會人，<br>或許沒辦法有更多的時間再去創造一款這麼宏大的遊戲。<br>但如果能夠有非常有錢並且熱愛這個ip的粉絲，願意注資大量金錢替團隊解決柴米油鹽醬醋茶的問題，<br>或許這個奇蹟就有可能被實現。
+    </div>
+  </div>
+
+      </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+
+
+    document.querySelectorAll('.faq-sub-item').forEach(subItem => {
+      subItem.querySelector('.faq-sub-question').addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        subItem.classList.toggle('active');
+      });
+    });
+  });
+  </script>
+
+    </body>
+    </html>

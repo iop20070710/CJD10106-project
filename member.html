@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>會員專區</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: url('pic/background-texture.png') repeat;
+      color: #fff;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .member-box {
+      background: rgba(0,0,0,0.7);
+      max-width: 600px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .actions a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #87f8c9, #42ba98);
+      color: #000;
+      text-decoration: none;
+      border-radius: 30px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .actions a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="member-box">
+    <h1>歡迎回來，<span id="nickname">使用者</span>！</h1>
+    <p>這裡是你的會員專區，可以管理你的遊戲、訂單與帳號。</p>
+
+    <div class="actions">
+      <a href="orders.html">購買紀錄</a>
+      <a href="profile.html">個人資料</a>
+      <a href="#" id="logout">登出</a>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("loginUser"));
+    if (user) {
+      document.getElementById("nickname").textContent = user.nickname;
+    } else {
+      // 沒登入就導回登入頁
+      window.location.href = "doctype.html";
+    }
+
+    document.getElementById("logout").addEventListener("click", function(e) {
+      e.preventDefault();
+      localStorage.removeItem("loginUser");
+      alert("你已成功登出！");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

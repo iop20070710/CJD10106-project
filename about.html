@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>關於我們｜金針咕</title>
+<style>
+    body {
+    margin: 0;
+    font-family: sans-serif;
+    background: url('pic/background-texture.png') repeat;
+    color: #fff;
+    padding-top: 80px; 
+    }
+
+    .breadcrumb {
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 14px;
+    }
+
+    .breadcrumb a {
+    color: #ffffff;
+    text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        color: #87f8c9;
+    text-decoration: underline;
+    }
+
+    .main-wrapper {
+    padding-top: 100px; 
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+
+    .about-content {
+    background-color: rgba(0,0,0,0.4);
+    padding: 16px 20px;
+    border-radius: 8px;
+    }
+
+    .intro {
+    white-space: pre-line;
+    line-height: 1.8;
+    margin-bottom: 2em;
+    }
+
+    .team {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 2em;
+    }
+
+    .member {
+    flex: 1 1 calc(26% - 1em);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: #2e2e2e;
+    border-radius: 12px;
+    padding: 0.8em 0.8em 1em 0.8em;
+    text-align: center;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    }
+
+    .member:hover {
+    transform: translateY(-5px);
+    }
+
+    .member img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1em;
+    display: block;
+    }
+
+    .member h3 {
+    margin: 0.5em 0 0.2em;
+    font-size: 1.2em;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 0.5em;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    .member p {
+    margin: 0.5em 0;
+    font-size: 0.9em;
+    color: #ddd;
+    line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+    .team {
+        flex-direction: column;
+    }
+    .member {
+        flex: 1 1 100%;
+    }
+    }
+</style>
+</head>
+<body>
+
+<div id="header-placeholder"></div> 
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("header-placeholder").innerHTML = data;
+    });
+});
+</script>
+
+<div class="main-wrapper">
+    <div class="breadcrumb">
+        <a href="index.html">首頁</a> &gt; 關於我們
+    </div>
+
+    <div class="about-content">
+        <div class="intro">
+歡迎來到 "金針咕"，我們是一支下班後忙裡偷閒的遊戲製作團隊，專注於研究並創造出各式各樣不同模式的遊戲。<br>
+我們希望能在一款遊戲中創造出既能讓人捧腹大笑的小篇章，和能讓人感受到世界觀厚重感的主線故事。<br>
+與此同時我們也和不同的遊戲製作者進行合作，以對方的企劃創造出富有生命力的遊戲。<br>
+我們的目標是為您提供讓您覺得物超所值體驗的電子遊戲，帶給您充實與滿足感。<br>
+感謝您選擇我們，我們期待我們的遊戲能帶給你一段奇幻而快樂的旅程。
+        </div>
+    </div>
+
+    <div class="team">
+        <div class="member">
+            <img src="pic/gugugu.png" alt="咕咕咕">
+            <h3>咕咕咕</h3>
+            <p>企劃。</p>
+            <p>負責整體規劃與協調。<br>團隊的心臟。</p>
+        </div>
+        <div class="member">
+            <img src="pic/toothpick.png" alt="牙籤">
+            <h3>牙籤</h3>
+            <p>美術。</p>
+            <p>負責繪製各式美術需求。<br>團隊的顏質。</p>
+        </div>
+        <div class="member">
+            <img src="pic/agold.png" alt="黃金">
+            <h3>黃金</h3>
+            <p>程式。</p>
+            <p>負責處理遊戲的各式功能。<br>團隊的頭腦。</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+    <!DOCTYPE html>
+    <html lang="zh-Hant">
+    <head>
+    <meta charset="UTF-8">
+    <title>會員登入</title>
+    <style>
+
+
+        body {
+        font-family: sans-serif;
+        background: url('pic/background-texture.png') repeat;
+        margin: 0;
+        min-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        }
+
+        .container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .login-box {
+        background: #2b2b2b;
+        padding: 40px;
+        border-radius: 20px;
+        color: #ffffff;
+        width: 300px;
+        text-align: center;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        border: 3px solid #ccc;
+        }
+
+        .login-box .links a {
+        color: #ffffff;     /* 確保預設是白色 */
+        text-decoration: none;  /* 移除底線 */
+        transition: color 0.2s ease;
+        }
+
+        .login-box .links a:hover {
+        color: #87f8c9;
+        }
+
+        .login-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 20px;
+        }
+        .login-box button {
+        background: #fff;
+        color: #000;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        }
+        .login-box .links {
+        font-size: 12px;
+        margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        }
+        .login-box .social {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        }
+        .login-box .social img {
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+        <div id="header-placeholder"></div> 
+
+            <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("header.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+            });
+        });
+        </script>
+
+    <div class="container">
+    <div class="login-box">
+        <form id="login-form">
+        <div>
+            <label>帳號：</label>
+            <input type="text" id="username" placeholder="請輸入帳號" required>
+        </div>
+        <div>
+            <label>密碼：</label>
+            <input type="password" id="password" placeholder="請輸入密碼" required>
+        </div>
+        <button type="submit">登入</button>
+        </form>
+        <div class="links">
+        <a href="#">忘記密碼？</a>
+        <a href="#">我是新會員</a>
+        </div>
+        <hr>
+        <div>OR</div>
+        <div class="social">
+        <img src="pic/google.png" alt="Google">
+        <img src="pic/twitter.png" alt="X">
+        <img src="pic/facebook.png" alt="Facebook">
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const users = [
+        { username: "aaa123", password: "aaa123", nickname: "網頁菜狗" }
+        ];
+
+        function isValidFormat(str) {
+        return /[a-zA-Z]/.test(str) && /\d/.test(str);
+        }
+
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!isValidFormat(username) || !isValidFormat(password)) {
+            alert("帳號與密碼需包含英文與數字");
+            return;
+        }
+
+        const user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+            localStorage.setItem("loginUser", JSON.stringify(user));
+            alert(`歡迎回來，${user.nickname}`);
+            window.location.href = "member.html";
+        } else {
+            alert("帳號或密碼錯誤");
+        }
+        });
+    </script>
+    </body>
+    </html>
