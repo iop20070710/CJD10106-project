@@ -80,12 +80,7 @@
   top: -100px; /* ⭐️ 往上移 50px */
 }
 
-.characters {
-  position: relative;
-  height: 600px; /* 預留空間高度 */
-  left: 800px;
-  top: -250px;
-}
+
 
 .characters a {
   position: absolute;
@@ -95,39 +90,11 @@
 }
 
 .characters img {
-  height: 600px; /* ⭐️ 放大一點比較有氣勢 */
+  height: 700px;
+  transform: translateY(-250px); /* ✅ 圖片向下平移 120px */
   object-fit: contain;
   transition: transform 0.3s, filter 0.3s;
-  transform-origin: bottom; /* ⭐️ 重點！縮放時以底邊為基準 */
-}
-
-/* 疊圖位置，類似你那張圖的感覺 → 左邊被蓋比較多，右邊越明顯 */
-.characters a:nth-child(1) {
-  left: -200px;
-  z-index: 1;
-}
-.characters a:nth-child(2) {
-  left: 150px;
-  z-index: 2;
-}
-.characters a:nth-child(3) {
-  left: 400px;
-  z-index: 3;
-}
-.characters a:nth-child(4) {
-  left: 600px;
-  z-index: 4;
-}
-
-.characters img.scale-0_9 {
-  transform: scale(0.9);
-}
-
-/* Hover 放大 + 浮最上 */
-.characters a:hover {
-  transform: scale(1.1);
-  z-index: 999;
-  filter: brightness(1.2);
+  transform-origin: bottom;
 }
 
 
@@ -175,21 +142,28 @@
   line-height: 2;
 }
 
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* 水平置中所有內容 */
+}
+
 .video-section {
   display: flex;
   flex-direction: column;   /* 讓文字在上、影片在下 */
   align-items: center;
   justify-content: center;
-  padding: 100px 0px;
+  padding: 100px 16px;
   width: 100%;
 }
 
 .video-section iframe {
-  width: 1075px;         /* 寬度調整這裡 */
-  height: 800px;        /* 高度調整這裡 */
-  max-width: 100%;      /* 不超過父容器 */
+  width: 100%;
+  max-width: 960px;     /* ✅ 避免在電腦過寬 */
+  aspect-ratio: 16 / 9; /* ✅ 自動按比例縮放高度 */
   border: none;
-  border-radius: 8px;   /* 可有圓角 */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* 可選：陰影提升質感 */
 }
 
 .video-title {
@@ -242,7 +216,7 @@
 
 .character-heads{ /*頭相框*/
   position: absolute; /* ⭐️讓它能自由定位 */
-  top: 2500px;         /* Y 位置 */
+  top: 2680px;         /* Y 位置 */
   left: 330px;         /* X 位置 */
   display: flex;      /* 若有多個頭像會自動橫排 */
 }
@@ -265,7 +239,7 @@
 
 .character-video-wrapper {
   position: absolute;
-  top: 2630px; /* ⭐️根據畫面微調，與頭像對齊 */
+  top: 2800px; /* ⭐️根據畫面微調，與頭像對齊 */
   left: 335px; /* 與頭像略微錯開 */
   width: 400px;
   height: 306px;
@@ -298,7 +272,7 @@
   border-radius: 45px 0 45px 0;      /* 左上 & 右下圓角 */
   max-width: 400px;                  /* 限制最大寬度 */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: -50px 300px;  
+  margin: 320px 300px;  
   /* 若要調整這個區塊的位置，可加上 margin 或設定外層為 flex 進行對齊 */
 }
 .character-box {
@@ -310,7 +284,7 @@
 
 .character-name {
   position: absolute;
-  top: 2280px;
+  top: 2470px;
   left: 330px;
   color: white;
   font-size: 24px;
@@ -341,8 +315,8 @@
 .character-quote { /*文字體框*/
   position: absolute;
   font-size: 44px;
-  top: 2680px;
-  left: 1180px;
+  top: 2950px;
+  left: 1200px;
   width: 30%;
   background-color: rgba(0, 0, 0, 0.2); /* 黑色半透明底 */
   color: white; /* 文字變白 */
@@ -656,6 +630,13 @@
   object-fit: contain;
 }
 
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: white;
+  padding: 15px;
+}
+
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
@@ -674,6 +655,194 @@
         align-items: center;
       }
     }
+
+    @media (max-width: 768px) {
+  .characters {
+    transform: scale(0.8) translateX(-30px); /* 縮小並微調位置 */
+    height: auto;
+  }
+
+  .promo-text, .promo-sub {
+    margin-left: 30px;
+    max-width: 80%;
+    font-size: 20px;
+  }
+
+  .logo {
+    width: 280px;
+    margin-left: 20px;
+    top: -50px;
+  }
+
+  .main-nav {
+    justify-content: flex-end;
+    padding-right: 20px;
+  }
+
+  .nav-list {
+    display: none; /* 先隱藏選單 */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: rgba(0,0,0,0.9);
+    flex-direction: column;
+    width: 200px;
+    z-index: 99;
+    padding: 10px 20px;
+    border-radius: 12px 0 0 12px;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.desktop-only {
+  display: block;
+}
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container{
+    margin-bottom: 650px;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: flex;
+    position: relative;    /* ⭐ 重要：讓小圖能絕對定位在容器內 */
+    width: 100%;
+    height: 300px;         /* 根據需要調整高度 */
+  }
+
+  .mobile-only .char {
+    position: absolute;    /* ⭐ 讓每張小圖可以自訂位置 */
+    height: 180px;
+    object-fit: contain;
+  }
+
+  /* ⭐ 分別定義每一張小圖的位置（你可以調整） */
+
+  .logo{
+    height: 200px;
+    width: auto;
+    top:  -130px;
+    left: 130px;
+  }
+  .promo-text, .promo-sub {
+    bottom: 100px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  }
+
+  .promo-divider{
+    position: absolute;
+    bottom: 20px;
+    width: 500px;  
+  }
+
+
+  .mobile-only .char {
+    position: absolute;
+ 
+  }
+  .mobile-only .char1 {
+    height: 800px;
+    bottom: 0px;
+    left: 400px;
+    z-index: 2;
+  }
+  .mobile-only .char2 {
+    height: 800px;
+    bottom: 200px;
+    left: -40px;
+    transform: scaleX(-1);
+    z-index: 2;
+  }
+  .mobile-only .char3 {
+    height: 800px;
+    bottom: 650px;
+    left: -80px;
+    transform: scaleX(-1);
+    z-index: 1;
+  }
+  .mobile-only .char4 {
+    height: 800px;
+    bottom: 430px;
+    left: 450px;
+    position: absolute;
+    z-index: 1;
+  }
+
+.character-image {
+  position: absolute;     /* ✅ 絕對定位，才能用 top / left 控制位置 */
+  top: -2180px;             /* ✅ 垂直位置（依需求調整） */
+  left: -850px;              /* ✅ 先將圖片 X 軸置中 */
+  z-index: -1;
+}
+
+.character-Group {
+  width: 550px;   /* ✅ 想多大寫多大 */
+  height: auto;
+  max-width: none; /* 取消預設縮放限制 */
+}
+
+.character-text {
+  position: absolute;
+  top: 290px; 
+  left: 60px;              /* 垂直位置你可以調整 */
+  transform: translateX(-50%); /* ⭐ 把整個區塊向左移自身寬度一半，達到置中 */
+  width: 90%;               /* ⭐ 手機時適應寬度 */
+  max-width: 380px;
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.6); 
+  color: white;
+  padding: 16px;
+  border-radius: 12px;
+  line-height: 1.8;
+  z-index: 2;
+  text-align: center;
+}
+
+.character-heads {
+  position: absolute;
+  top: 960px;
+  left: 56%;                  /* ⭐ 水平置中 */
+  transform: translateX(-50%); /* ⭐ 同樣向左平移一半 */
+  width: 500px;
+}
+
+
+
+.character-name {
+  position: absolute;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  width: 180px;           /* ✅ 讓它能自由移動 */
+  top: 560px;                  /* ✅ 你可以依照實際畫面調整 */
+  left: 40%;                  /* ✅ 配合圖片位置設定 X 軸 */
+}
+
+.character-view {
+  position: relative;
+  min-height: 500px; /* 根據你的內容調整，保證撐開高度 */
+}
+
+
+  .team-switcher {
+    margin-top: 140px; /* ⬅️ 整體下推 */
+  }
+}
+body {
+overflow-x:hidden;
+}
   </style>
 
 <audio id="bounce-sound" src="sound/miniActor.mp3" preload="auto"></audio>
@@ -684,6 +853,9 @@
 <body>
   <header>
     <nav class="main-nav">
+      <div class="hamburger" onclick="toggleMenu()">
+  ☰
+</div>
       <ul class="nav-list">
         <li><a href="index.html"><img src="pic/index.svg" class="icon" /> 首頁</a></li>
         <li><a href="#video-section"><img src="pic/video.svg" class="icon" /> 宣傳影片</a></li>
@@ -697,16 +869,21 @@
   </header>
 
 
-
   <div class="container">
     <img src="pic/logo.png" alt="LOGO" class="logo" />
-    </div>
-    <div class="characters">
-      <a href="#"><img src="pic/material_chara_001.png" alt="角色1" /></a>
-      <a href="#"><img src="pic/material_chara_002.png" alt="角色2" /></a>
-      <a href="#"><img src="pic/material_chara_003.png" class="scale-0_9"  /></a>
-      <a href="#"><img src="pic/material_chara_004.png" alt="角色4" /></a>
   </div>
+  <div class="hero-wrapper">
+      <div class="characters  desktop-only">
+        <img src="pic/material_chara.png" alt="角色" />
+    </div>
+      <div class="characters mobile-only">
+      <img src="pic/Actor_31_mobile.png" alt="角色1" class="char char1" />
+      <img src="pic/Actor_32_mobile.png" alt="角色2" class="char char2" />
+      <img src="pic/Actor_33_mobile.png" alt="角色3" class="char char3" />
+      <img src="pic/Actor_34_mobile.png" alt="角色4" class="char char4" />
+    </div>
+  </div>
+  
   
     <div class="promo-text">
       沉睡了五千年的寶藏，<br />我一定要找到！
@@ -716,6 +893,7 @@
     <div class="promo-sub">
       這是由最大最強的冒險團，<br>與充滿熱情的新手冒險團的相遇，<br>交織而成的故事。
     </div>
+  </div>
 
 <section id="video-section" class="video-section">
   <h2 class = "video-title">宣傳影片</h2>
@@ -732,8 +910,10 @@
     <h2 class="character-profile">角色介紹</h2>
 <aside class="team-selector">
 <ul>
+  <div class="team-switcher">
   <li class="adventure-team" data-team="pinway">蘋薇冒險團</li>
   <li class="adventure-team" data-team="lion">血戰雄獅團</li>
+  </div>
 </ul>
 </aside>
 
@@ -747,7 +927,7 @@
   <img src="pic/AK37.png" data-character="Yeduan" data-team="lion" />
   <img src="pic/AK38.png" data-character="Hanchan" data-team="lion" />
 </div>
-<div class="character-video-wrapper">
+<div class="character-video-wrapper   desktop-only">
   <video id="character-video" controls autoplay muted>
     <source src="" type="video/mp4">
     您的瀏覽器不支援 HTML5 影片播放。
@@ -758,11 +938,13 @@
   <span class="character-name-chinese">蘋薇</span>
   <span class="character-name-english">Pinway</span>
 </div>
-<p id="character-description" class="character-text">…</p>
+
 <div class="character-image">
-  <img id="character-image" src="pic/Group.png" alt="立繪" class="character-Group" />
+<img id="character-image" class="character-Group" />
 </div>
-<div id="character-quote" class="character-quote">…</div>
+<div id="character-quote" class="character-quote  desktop-only">…</div>
+<p class="character-text character-description desktop-only">…</p>
+<p class="character-text character-description mobile-only">…</p>
   </div>
 </section>
 
@@ -825,7 +1007,12 @@
 </footer>
 </section>
 
-
+<script>
+  function toggleMenu() {
+    const menu = document.querySelector('.nav-list');
+    menu.classList.toggle('show');
+  }
+</script>
 <script src="characters.js"></script>
 <script src="character-switcher.js"></script>
 <script src="download.js"></script>

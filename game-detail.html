@@ -181,15 +181,26 @@
 <body>
     <div id="header-placeholder"></div> 
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch("header.html")
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("header-placeholder").innerHTML = data;
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("header.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("header-placeholder").innerHTML = data;
+
+      // 🔧 在載入完成後手動綁定漢堡事件
+      const hamburger = document.querySelector(".hamburger");
+      const navList = document.getElementById("navList");
+
+      if (hamburger && navList) {
+        hamburger.addEventListener("click", () => {
+          navList.classList.toggle("show");
         });
+      }
     });
-    </script>
+});
+
+</script>
 
 
 <script src="game.data.js"></script>
