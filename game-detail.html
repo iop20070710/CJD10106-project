@@ -175,6 +175,64 @@
         box-shadow: none;
         }
 
+        @media (max-width: 768px) {
+  .main-wrapper {
+    padding-top: 80px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .game-detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-left,
+  .game-right {
+    width: 100%;
+  }
+
+  .main-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .thumbnail-viewport {
+    width: 90vw; /* 適應螢幕寬度 */
+  }
+
+  .thumbnail {
+    width: 100px;
+    height: 66px;
+  }
+
+  .game-intro {
+    padding-top: 30px;
+  }
+
+  .breadcrumb {
+    font-size: 13px;
+    padding-left: 10px;
+  }
+
+  .buy-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #prev-arrow,
+  #next-arrow {
+    font-size: 20px;
+    height: 66px;
+  }
+}
         
     </style>
 </head>
@@ -183,20 +241,20 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("header.html")
+    fetch("header.html")
     .then(response => response.text())
     .then(data => {
-      document.getElementById("header-placeholder").innerHTML = data;
+    document.getElementById("header-placeholder").innerHTML = data;
 
       // 🔧 在載入完成後手動綁定漢堡事件
-      const hamburger = document.querySelector(".hamburger");
-      const navList = document.getElementById("navList");
+        const hamburger = document.querySelector(".hamburger");
+        const navList = document.querySelector(".nav-list");
 
-      if (hamburger && navList) {
+        if (hamburger && navList) {
         hamburger.addEventListener("click", () => {
-          navList.classList.toggle("show");
+            navList.classList.toggle("show");
         });
-      }
+        }
     });
 });
 

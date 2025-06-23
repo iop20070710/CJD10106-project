@@ -72,58 +72,74 @@
   user-select: none;
 }
 
-@media (max-width: 768px) {
-  .main-nav {
-    justify-content: space-between;
-    padding: 0 20px;
-  }
 
-  .hamburger {
-    display: block;
-    margin-left: auto;
+    @media (max-width: 768px) {
+
+  .main-nav {
+    justify-content: flex-end;
+    padding-right: 0px;
   }
 
   .nav-list {
-    display: none;
+    display: none; /* 先隱藏選單 */
     position: absolute;
     top: 60px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.9);
+    right: 10px;
+    background: rgba(0,0,0,0.9);
     flex-direction: column;
-    width: 220px;
-    padding: 16px;
-    border-radius: 12px;
-    gap: 20px;
+    width: 200px;
+    z-index: 99;
+    padding: 15px;           /* ⭐ 增加內距 */
+    border-radius: 12px;     /* ✅ 圓角效果 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* ⭐ 加點陰影 */
   }
 
   .nav-list.show {
     display: flex;
   }
 
-  .nav-list li a {
-    font-size: 18px;
+  .hamburger {
+    display: block;
+    cursor: pointer;
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 
-<header>
-  <nav class="main-nav">
-    <ul class="nav-list" id="navList">
-      <li><a href="index.html"><img src="pic/index.svg" class="icon" /> 首頁</a></li>
-      <li><a href="index.html#video-section"><img src="pic/video.svg" class="icon" /> 宣傳影片</a></li>
-      <li><a href="index.html#main-wrapper"><img src="pic/actor.svg" class="icon" /> 角色介紹</a></li>
-      <li><a href="index.html#news-section"><img src="pic/news.svg" class="icon" /> 最新消息</a></li>
-      <li><a href="index.html#download-section"><img src="pic/download.svg" class="icon" /> 遊戲下載</a></li>
-      <li><a href="index.html#contact-title"><img src="pic/phone.svg" class="icon" /> 聯絡我們</a></li>
-      <li><a href="doctype.html"><img src="pic/login.svg" class="icon" /> 登入</a></li>
-    </ul>
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-  </nav>
-</header>
+  <header>
+    <nav class="main-nav">
+      <div class="hamburger" onclick="toggleMenu()">
+  ☰
+</div>
+      <ul class="nav-list">
+        <li><a href="index.html"><img src="pic/index.svg" class="icon" /> 首頁</a></li>
+        <li><a href="#video-section"><img src="pic/video.svg" class="icon" /> 宣傳影片</a></li>
+        <li><a href="#main-wrapper"><img src="pic/actor.svg" class="icon" /> 角色介紹</a></li>
+        <li><a href="#news-section"><img src="pic/news.svg" class="icon" /> 最新消息</a></li>
+        <li><a href="#download-section"><img src="pic/download.svg" class="icon" /> 遊戲下載</a></li>
+        <li><a href="#contact-title"><img src="pic/phone.svg" class="icon" /> 聯絡我們</a></li>
+        <li><a href="doctype.html"><img src="pic/login.svg" class="icon" /> 登入</a></li>
+      </ul>
+    </nav>
+  </header>
 
 <script>
   function toggleMenu() {
-    const navList = document.getElementById("navList");
-    navList.classList.toggle("show");
+    const menu = document.querySelector('.nav-list');
+    menu.classList.toggle('show');
   }
 </script>

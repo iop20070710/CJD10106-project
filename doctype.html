@@ -92,12 +92,12 @@
 
             // 🔧 在載入完成後手動綁定漢堡事件
             const hamburger = document.querySelector(".hamburger");
-            const navList = document.getElementById("navList");
+            const navList = document.querySelector(".nav-list");
 
             if (hamburger && navList) {
-                hamburger.addEventListener("click", () => {
+            hamburger.addEventListener("click", () => {
                 navList.classList.toggle("show");
-                });
+            });
             }
             });
         });
